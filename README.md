@@ -1,34 +1,95 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Job Assignment Api (Front End)
 
-## Getting Started
+<!-- ## Demo & Snippets
 
-First, run the development server:
+-   Include hosted link
+-   Include images of app if CLI or Client App
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+--- -->
+## Stack
+Nextjs, TailWind
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Requirements / Purpose
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+- You will need to add spring security to your backends to allow temps to log in (you'll need to add credentials to each temp record too)
+- API should only return jobs that are unassigned or are assigned to the reports of the currently logged in temp
+- API should only return temps that are reporting to the currently logged-in user in the hierarchy
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<!-- ## Build Steps
 
-## Deploy on Vercel
+-   how to build / run project
+-   use proper code snippets if there are any commands to run
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+--- -->
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Design Goals / Approach
+
+-   All endpoints need to be authorized, apart from login
+-   All pages other than `/login` should redirect to `/login` if no temp is logged in
+-   Currently logged-in users should not be able to see or update temps or jobs assigned to temps that are not reporting to them in the hierarchy
+---
+
+## Features
+
+`/login`
+
+-   Allows user to log in
+-   Each temp should be allowed to log in
+-   You will need to add credentials and spring security to your spring applications
+
+`/profile`
+
+-   Display the current logged in user
+-   Should be able to edit all fields
+
+`/temps`
+
+-   Display all temps, each entry should link to `/temps/:id`
+-   You should only be able to see temps that report to you (logged in temp)
+
+`/temps/:id`
+
+-   Display temp record by `id`
+-   You should only be able to see temps that report to you (logged in temp)
+-   Attempting to get a temp that doesn't report to the currently logged-in user should return a 404 page
+
+`/jobs`
+
+-   Display all unassigned jobs
+-   Display jobs that are assigned either to the currently logged in temp, or reports of the currently logged in temp
+
+`/jobs/:id`
+- Display job information, with a drop down to assign temps
+- Dropdown should be populated by the API
+
+---
+
+<!-- ## Known issues
+
+-   Remaining bugs, things that have been left unfixed
+-   Features that are buggy / flimsy
+
+--- -->
+
+<!-- ## Future Goals
+
+-   What are the immediate features you'd add given more time
+
+--- -->
+
+## Change logs
+
+### 19/06/2023 | Project Creation
+---
+
+<!-- ## What did you struggle with?
+
+-   What? Why? How?
+
+--- -->
